@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!-- ***** BEGIN LICENSE BLOCK *****
+   - Version: MPL 1.1
+   -
+   - The contents of this file are subject to the Mozilla Public License Version
+   - 1.1 (the "License"); you may not use this file except in compliance with
+   - the License. You may obtain a copy of the License at
+   - http://www.mozilla.org/MPL/
+   -
+   - Software distributed under the License is distributed on an "AS IS" basis,
+   - WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+   - for the specific language governing rights and limitations under the
+   - License.
+   -
+   - The Original Code is IRC Auto Downloader.
+   -
+   - The Initial Developer of the Original Code is
+   - David Nilsson.
+   - Portions created by the Initial Developer are Copyright (C) 2010, 2011
+   - the Initial Developer. All Rights Reserved.
+   -
+   - Contributor(s):
+   -
+   - ***** END LICENSE BLOCK ***** -->
+
+<trackerinfo
+	type="ftc"
+	shortName="FTC"
+	longName="FeedTheClub"
+	siteName="feedthe.club">
+
+	<settings>
+	</settings>
+
+	<servers>
+		<server
+			network="FeedTheClub"
+			serverNames="irc.feedthe.club"
+			channelNames="#announce"
+			announcerNames="VALE"
+			/>
+	</servers>
+
+	<parseinfo>
+		<linepatterns>
+			<extract>
+				<!-- [TV-1080p] Fear.The.Walking.Dead.S05E06.MULTi.1080p.HDTV.H264-HYBRiS .:. https://feedthe.club/torrent/1036/Fear.The.Walking.Dead.S05E06.MULTi.1080p.HDTV.H264-HYBRiS .:. 2.48 GiB .:. Uploaded by: Anonymous -->
+				<!-- [Movies-1080p] Alita.Battle.Angel.2019.1080p.WEB-DL.H264.AC3-EVO .:. https://feedthe.club/torrent/1060/Alita.Battle.Angel.2019.1080p.WEB-DL.H264.AC3-EVO .:. 4.20 GiB .:. Uploaded by: Anonymous -->
+				<!-- [Games-PC] CLS.Signal.Person-DARKSiDERS .:. https://feedthe.club/torrent/1058/CLS.Signal.Person-DARKSiDERS .:. 2.86 GiB .:. Uploaded by: Anonymous -->
+				<regex value="\[(.*)\] .* .:. (https?://.*) .:. (?:.*) .:. Uploaded by: (.*)"/>
+				<vars>
+					<var name="category"/>
+					<var name="torrentName"/>
+					<var name="$torrentSize"/>
+					<var name="$baseUrl"/>
+				</vars>
+			</extract>
+		</linepatterns>
+		<linematched>
+			<var name="torrentUrl">
+				<var name="$baseUrl"/>
+				<string value="&amp;authkey="/>
+				<var name="authkey"/>
+				<string value="&amp;torrent_pass="/>
+				<var name="torrent_pass"/>
+			</var>
+		</linematched>
+		<ignore>
+		</ignore>
+	</parseinfo>
+</trackerinfo>
